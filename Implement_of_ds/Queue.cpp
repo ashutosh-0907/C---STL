@@ -5,7 +5,7 @@ using namespace std;
 class Queue{
     int front;
     int rear;
-    int element;
+    int ele;
     int arr[n];
     public:
     Queue(){
@@ -18,15 +18,17 @@ class Queue{
             return;
         }
         rear++;
-        arr[rear]=ele;
-        front++;
+        arr[rear]=ele; 
+        if (front == -1) front = 0; 
+        
     }
     int deque(){
-        if(front==-1){
+        if(front==-1 || front > rear){
             cout<<"underflow";
+            return -1;
         }
-        int x = arr[rear];
-        front--;
+        int x = arr[front];
+        front++;
         return x;
     }
 
