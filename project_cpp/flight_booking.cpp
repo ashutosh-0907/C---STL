@@ -13,9 +13,10 @@ class Flight{
 
     public: 
 
-    Flight(int fNo, string fName, int capa){
+    Flight(int fNo, string fName, string desti,int capa){
         flightNo = fNo;
         flightName = fName;
+        destination=desti;
         capacity = capa;
         seat=0;
     }
@@ -34,21 +35,40 @@ class Flight{
         return capacity;
     }
 
-    bool isFull(){
-        if(seat==capacity){
-            cout<<"No seat vacant";
-        }
-        if(capacity==0){
-            cout<<"Please enter valid capacity";
-        }
-    }
-    void addPassenger(string namePassengr){
-        passengerName.push_back(namePassengr);
-        seat++;
-    }
-
     
-
-
-
+    bool bookPassenger(string pname){
+        if(passengerName.size()<capacity){
+            passengerName.push_back(pname);
+            return true;
+        }
+        return false;
+    }
+    void printPassenger(){
+        for(int i=0;i<passengerName.size();i++){
+            cout<<passengerName[i]<<" ";
+        }
+    }
+    void printFlightDetails(){
+        cout << "Flight Number: " << flightNo << endl;
+        cout << "Flight Name: " << flightName << endl;
+        cout << "Destination: " << destination << endl;
+        cout << "Capacity: " << capacity << endl;
+        cout << "Booked Seats: " << passengerName.size() << "/" << capacity << endl;
+    }
 };
+
+int main(){
+    Flight F(123,"ABC","Delhi",5);
+    F.bookPassenger("Ashu");
+    F.bookPassenger("Nitish");
+    F.bookPassenger("Om");
+    F.bookPassenger("Ro");
+    F.bookPassenger("Deepak");
+    F.bookPassenger("Asha");
+    F.bookPassenger("Soo");
+    F.bookPassenger("Tanni");
+    
+    F.printFlightDetails();
+    F.printPassenger();
+    return 0;
+}
